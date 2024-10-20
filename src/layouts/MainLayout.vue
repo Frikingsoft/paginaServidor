@@ -1,22 +1,16 @@
 <template>
   <q-layout>
     <q-page-container class="row justify-center">
-      <Login class="col-12" v-if="!login"/>
-      <router-view class="col-12" v-if="login"/>
-      <div class="coso">
-        <h1 class="coso2">{{ el_mensaje }}</h1>
-      </div>
+      <router-view class="col-12"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted } from 'vue'
 import { io } from 'socket.io-client'
-import Login from '../components/Login.vue'
 
 const el_mensaje = ref(null)
-const login = ref(false)
 const socket = ref(null)  // Para almacenar la conexión de Socket.IO
 
 defineOptions({
@@ -57,24 +51,6 @@ onMounted(() => {
     padding: 0;
     box-sizing: border-box;
   }
-  .coso{
-    width: 60%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    z-index: 1;
-  }
-  .coso2{
-    padding: 40px;
-    backdrop-filter: blur(40px);
-     background-color: rgba(255, 255, 255, 0.3);
-     box-shadow: 3px 3px 5px rgba(151, 175, 209, 0.5);
-     box-shadow: 3px 3px 8px rgb(9, 66, 127);
-  }
-  .coso h1{
-    font-size: 3rem;
-  }
+ 
+  
 </style>

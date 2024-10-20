@@ -1,7 +1,7 @@
 <template>
   <div class="login row justify-center">
-    <div class="uno col-4 row justify-center items-center row">
-        <q-card class="tarjeta col-10 ">
+    <div class="uno col-xs-12 col-md-5 row justify-center items-center row">
+        <q-card class="tarjeta col-xs-10 col-sm-6 col-md-7">
         <q-card-section class="formulario row justify-center items-center">
             <q-form @submit="onSubmit" @reset="onReset" class="col-10">
             <q-input
@@ -16,17 +16,22 @@
                 :rules="dato.reglas"
             />
 
-            <q-toggle v-model="licencia" label="Acepto los términos de licencia" class="q-mb-md"/>
-    
+            
+            <h3 class="texto_registro flex flex-center q-mb-xl"> 
+              No tienes cuenta
+              <router-link class="flex flex-center q-ml-md" to="/registro"> Click aquí  </router-link>
+            </h3>
+      
             <div class="flex flex-center">
-                <q-btn label="Enviar" type="submit" color="primary" class="boton_enviar" @click.prevent="enviar"/>
+                <q-btn label="Enviar" type="submit" class="boton_enviar" @click.prevent="enviar"/>
             
             </div>
             </q-form>
         </q-card-section>
+     
         </q-card>
     </div>
-    <div class="imagen col-8">
+    <div class="imagen col-7">
 
     </div>
   </div>
@@ -71,7 +76,7 @@ const enviar = async ()=>{
     }
     datos_finales.value.push(objeto)                         
     })
-  await axios.post('http://localhost/login',datos_finales.value)
+  await axios.post('http://localhost/login',{})
   .then(function (response) {
     console.log(response);
   })
@@ -97,23 +102,41 @@ const enviar = async ()=>{
  
 }
 .uno{
-    background-image: linear-gradient(rgba(18, 68, 139, 0.5), rgba(18, 68, 139, 0.5)), url("/imagenes/mensaje.png");
-    background-size: 100% 50%;
+    background-image: url("/imagenes/mensaje.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     height: 100%;
 }
 .tarjeta {
     height: 50%;
      backdrop-filter: blur(40px);
      background-color: rgba(255, 255, 255, 0.3);
-     box-shadow: 3px 3px 5px rgba(151, 175, 209, 0.5);
      border-radius: 5%;
+     box-shadow: 1px 1px 1px rgb(73, 73, 73),2px 2px 2px rgb(255, 255, 255),
+    3px 3px 3px rgb(101, 101, 101),4px 4px 2px rgb(255, 255, 255),5px 5px 2px rgb(15, 15, 15);
 }
 
 .imagen{
    background-image: url("/imagenes/fondo.png");
     height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 .boton_enviar{
     width: 40%;
+    background-color: rgb(13, 50, 109);
+    color: white;
+    box-shadow: 1px 1px 1px rgb(73, 73, 73),2px 2px 2px rgb(255, 255, 255),
+    3px 3px 3px rgb(101, 101, 101),4px 4px 2px rgb(255, 255, 255),5px 5px 2px rgb(15, 15, 15);
+}
+.texto_registro{
+  font-size: 1.5rem;
+  color: rgb(13, 50, 109);
+  display: flex;
+  justify-content: baseline;
+}
+.texto_registro a{
+  color: rgb(13, 50, 109);
+  font-size: 1.2rem;
 }
 </style>
