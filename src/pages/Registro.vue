@@ -53,7 +53,7 @@
 
         <!-- Sección de botones -->
         <div class="flex flex-center q-mb-xl">
-          <q-btn label="Enviar" class="q-mr-md botones" @click="enviar_datos"/>
+          <q-btn label="Enviar" class="q-mr-md botones" @click="validar_usuario"/>
           <q-btn label="Login" class="botones" @click="enviar_login"/>
         </div>
       </q-card>
@@ -63,41 +63,16 @@
 
 <script setup>
 import { ref } from "vue"
-import { useRouter } from "vue-router" 
-const router = useRouter()
+import { funciones } from "../composables/mis_funciones"
+const  { enviar_login,cambiar_estado,reglas_contra, reglas_repetir_contra,
+reglas_correo,reglas_usuario, validar_usuario } = funciones()
 const datos_usuario = ref([])
 const entradas = ref([
-    {nombre:"Usuario", valor:"", icono:"fas fa-user", tipo:"text",reglas: [(val) => (val && val.length > 0) || "Ingrese un nombre de usuario"]},
-    {nombre:"Correo", valor:"", icono:"fas fa-envelope", tipo:"email",reglas:[
-        (val) => /.+@.+\..+/.test(val) || "Correo inválido"
-    ]},
-    {nombre:"Contraseña", valor:"", icono:"fas fa-lock", tipo:"password", ver:false,reglas: [
-    (val) => val.length >= 8 || "La contraseña debe tener al menos 8 caracteres",
-    (val) => /[A-Z]/.test(val) || "Debe incluir al menos una letra mayúscula",
-    (val) => /[a-z]/.test(val) || "Debe incluir al menos una letra minúscula",
-    (val) => /\d/.test(val) || "Debe incluir al menos un número",
-    (val) => /[!@#$%^&*(),.?":{}|<>]/.test(val) || "Debe incluir al menos un carácter especial"
-  ]},
-    {nombre:"Repetir_Contraseña", valor:"", icono:"fas fa-lock", tipo:"password", ver:false,reglas: [
-    (val) => val.length >= 8 || "La contraseña debe tener al menos 8 caracteres",
-    (val) => /[A-Z]/.test(val) || "Debe incluir al menos una letra mayúscula",
-    (val) => /[a-z]/.test(val) || "Debe incluir al menos una letra minúscula",
-    (val) => /\d/.test(val) || "Debe incluir al menos un número",
-    (val) => /[!@#$%^&*(),.?":{}|<>]/.test(val) || "Debe incluir al menos un carácter especial",
-    (val) => val === entradas.value[2].valor || "Las contraseñas no coinciden" // Comparar con el campo de Contraseña
-  ]},
+    {nombre:"Usuario", valor:"", icono:"fas fa-user", tipo:"text",reglas: reglas_usuario},
+    {nombre:"Correo", valor:"", icono:"fas fa-envelope", tipo:"email",reglas:reglas_correo},
+    {nombre:"Contraseña", valor:"", icono:"fas fa-lock", tipo:"password", ver:false,reglas:reglas_contra },
+    {nombre:"Repetir Contraseña", valor:"", icono:"fas fa-lock", tipo:"password", ver:false,reglas:reglas_repetir_contra},
 ])
-
-const enviar_login = () => {
-        router.push("/login") 
-    }
-const cambiar_estado = (entrada) => {
-    entrada.ver = !entrada.ver; // Cambia el estado de 'ver'
-    entrada.tipo = entrada.ver ? "text" : "password"; // Cambia el tipo de input
-}
-const enviar_datos = ()=>{
- 
-}
 
 </script>
 
@@ -110,7 +85,7 @@ const enviar_datos = ()=>{
     box-shadow: none;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(20px);
    box-shadow: 1px 1px 1px rgb(73, 73, 73),2px 2px 2px rgb(255, 255, 255),
     3px 3px 3px rgb(101, 101, 101),4px 4px 2px rgb(255, 255, 255),5px 5px 2px rgb(15, 15, 15);
 }
@@ -145,14 +120,14 @@ const enviar_datos = ()=>{
 
 
 
-/* Cambiar el color del icono de error a verde */
+/* Cambiar el color del icono de error */
 .q-field--error .q-icon {
-  color: rgb(204, 94, 94) !important; /* Color del icono de error */
+  color: rgb(13, 54, 18) !important; /* Color del icono de error */
 }
 .q-field--error .q-field__messages > div {
-    color: rgb(204, 94, 94) !important; /* Cambia a verde */
+    color: rgb(25, 31, 144) !important;
 }
 .q-field--error .q-field__label {
-  color: rgb(204, 94, 94) !important; /* Cambiar el color del label a verde */
+  color: rgb(187, 189, 31) !important; /* Cambiar el color del label */
 }
 </style>
