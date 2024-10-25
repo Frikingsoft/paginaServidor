@@ -76,7 +76,7 @@ const entradas = ref([
 
 </script>
 
-<style soped>
+<style scoped>
 .fondo_pagina{
     background-image: url("./imagenes/fondo.png");
     background-size: 100% 100%;
@@ -120,14 +120,14 @@ const entradas = ref([
 
 
 
-/* Cambiar el color del icono de error */
+/* Cambiar el color del icono de error 
 .q-field--error .q-icon {
-  color: rgb(13, 54, 18) !important; /* Color del icono de error */
+  color: rgb(204, 94, 94) !important;  Color del icono de error 
 }
 .q-field--error .q-field__messages > div {
-    color: rgb(25, 31, 144) !important;
+    color: rgb(204, 94, 94) !important;
 }
 .q-field--error .q-field__label {
-  color: rgb(187, 189, 31) !important; /* Cambiar el color del label */
-}
+  color: rgb(204, 94, 94) !important; /* Cambiar el color del label 
+}*/
 </style>
